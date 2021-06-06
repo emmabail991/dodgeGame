@@ -34,6 +34,9 @@ namespace dodgeGame
         bool aDown = false;
         bool dDown = false;
 
+        //gmae start screen state variable
+        string gameState = "waiting";
+
         //hero size and starting location
         Rectangle hero = new Rectangle(20, 200, 20, 20);
       
@@ -49,6 +52,19 @@ namespace dodgeGame
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public void GameInitialize()
+        {
+            //spwan the first obsticle on each side and hero
+             
+             
+
+            titleLabel.Text = "";
+            subTitleLabel.Text = "";
+
+            gameTimer.Enabled = true;
+            gameState = "running";
         }
 
         //hero movment
@@ -68,7 +84,18 @@ namespace dodgeGame
                 case Keys.D:
                     dDown = true;
                     break;
-                 
+                case Keys.Space:
+                    if (gameState == "waiting" || gameState == "over" || gameState == "win")
+                    {
+                        GameInitialize();
+                    }
+                    break;
+                case Keys.Escape:
+                    if (gameState == "waiting" || gameState == "over" || gameState == "win")
+                    {
+                        Application.Exit();
+                    }
+                    break;
 
             }
         }
